@@ -12,6 +12,8 @@ let plants = [{
 let current_plant;
 let counter = 0;
 let hint = "Click to get started!";
+let waterHint = "";
+let sunHint = "";
 
 let $current_sun = $("#sun-number");
 let $current_water = $("#water-number");
@@ -25,6 +27,7 @@ $(document).ready(() => {
 // Click handlers
 document.getElementById("sun-number").oninput = function () {
     $("#sun-level").text(this.value);
+    checkSunVal();
     winChecker();
 }
 document.getElementById("water-number").oninput = function () {
@@ -65,10 +68,47 @@ const counterCheck = () => {
     }
 }
 
+// check sun levels and update inline hint
+const checkSunVal = () => {
+    let current_sun_value = parseInt($current_sun.val());
+    
+    if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax)){
+        sunHint = "right sun levels";
+        $('#temp-indicator').text(sunHint);
+    }
+    else if (current_sun_value < current_plant.sunMin) {
+        sunHint = "hotter";
+        $('#temp-indicator').text(sunHint);
+    } else if (current_sun_value > current_plant.sunMax) {
+        sunHint = "colder";
+        $('#temp-indicator').text(sunHint);
+    }
+}
+
+const inlineHints = () => {
+    // let current_sun_value = parseInt($current_sun.val());
+    // let current_water_value = parseInt($current_water.val());
+    // let current_soil_type = $('input[name=options]:checked', '#soil-type').val();
+    // // debugger;
+    // // sun hint
+    
+
+    // // water hint
+    // if (current_water_value < current_plant.waterMin) {
+    //     waterHint = "more water";
+    //     $('#water-indicator').text(waterHint);
+    // } else if (current_water_value > current_plant.waterMax) {
+    //     waterHint = "less water";
+    //     $('#water-indicator').text(waterHint);
+    // }
+}
+
+
+
 const winChecker = () => {
-    const current_sun_value = parseInt($current_sun.val());
-    const current_water_value = parseInt($current_water.val());
-    const current_soil_type = $('input[name=options]:checked', '#soil-type').val();
+    let current_sun_value = parseInt($current_sun.val());
+    let current_water_value = parseInt($current_water.val());
+    let current_soil_type = $('input[name=options]:checked', '#soil-type').val();
 
     $("#hit-counter").text(counter);
     // TODO: clean up conditionals below
@@ -96,7 +136,7 @@ const winChecker = () => {
         (current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax) &&
         (current_soil_type === current_plant.soilType)) {
         console.log("Sun levels are off, everything else good.")
-        hint = "Sun levels are off, everything else good."
+        hint = "Sun levels are off, everything else good.";
         counter++;
         counterCheck();
     }
