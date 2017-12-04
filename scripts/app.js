@@ -27,11 +27,12 @@ $(document).ready(() => {
 // Click handlers
 document.getElementById("sun-number").oninput = function () {
     $("#sun-level").text(this.value);
-    checkSunVal();
+    hintFunction("sun");
     winChecker();
 }
 document.getElementById("water-number").oninput = function () {
     $("#water-level").text(this.value);
+    hintFunction("water");
     winChecker();
 }
 
@@ -68,109 +69,155 @@ const counterCheck = () => {
     }
 }
 
+// hintFunction("sun")
+const hintFunction = (hint) => {
+    // if the hint a sun hint => sun stuff 
+    let theHint = "";
+    let location = "";
+    console.log(hint);
+
+    if (hint === "sun") {
+        
+        let current_sun_value = parseInt($current_sun.val());
+        location = "#temp-indicator";
+        
+        if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax)){
+            theHint = "right sun levels";
+        }
+        else if (current_sun_value < current_plant.sunMin) {
+            theHint = "hotter";
+            $('#temp-indicator').text(sunHint);
+        } else if (current_sun_value > current_plant.sunMax) {
+            theHint = "colder";
+        }
+    } else if (hint === "water") {
+        
+        let current_water_value = parseInt($current_water.val());
+        location = "#water-indicator";
+        
+        if ((current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax)){
+            theHint = "right water levels";
+        }
+        else if (current_water_value < current_plant.waterMin) {
+            theHint = "more water";
+            $('#water-indicator').text(waterHint);
+        } else if (current_water_value > current_plant.waterMax) {
+            theHint = "less water";
+        }
+    }
+    $(location).text(theHint);
+}
+
 // check sun levels and update inline hint
-const checkSunVal = () => {
-    let current_sun_value = parseInt($current_sun.val());
+// const checkSunVal = () => {
+//     let current_sun_value = parseInt($current_sun.val());
     
-    if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax)){
-        sunHint = "right sun levels";
-        $('#temp-indicator').text(sunHint);
-    }
-    else if (current_sun_value < current_plant.sunMin) {
-        sunHint = "hotter";
-        $('#temp-indicator').text(sunHint);
-    } else if (current_sun_value > current_plant.sunMax) {
-        sunHint = "colder";
-        $('#temp-indicator').text(sunHint);
-    }
-}
+//     if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax)){
+//         sunHint = "right sun levels";
+//         $('#temp-indicator').text(sunHint);
+//     }
+//     else if (current_sun_value < current_plant.sunMin) {
+//         sunHint = "hotter";
+//         $('#temp-indicator').text(sunHint);
+//     } else if (current_sun_value > current_plant.sunMax) {
+//         sunHint = "colder";
+//         $('#temp-indicator').text(sunHint);
+//     }
+// }
 
-const inlineHints = () => {
-    // let current_sun_value = parseInt($current_sun.val());
-    // let current_water_value = parseInt($current_water.val());
-    // let current_soil_type = $('input[name=options]:checked', '#soil-type').val();
-    // // debugger;
-    // // sun hint
+// // generate sun or water hint
+// // 
+
+// const checkWaterVal = () => {
+//     let current_water_value = parseInt($current_water.val());
+    
+//     if ((current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax)){
+//         waterHint = "right water levels";
+//         $('#water-indicator').text(waterHint);
+//     }
+//     else if (current_water_value < current_plant.waterMin) {
+//         waterHint = "more water";
+//         $('#water-indicator').text(waterHint);
+//     } else if (current_water_value > current_plant.waterMax) {
+//         waterHint = "less watter";
+//         $('#water-indicator').text(waterHint);
+//     }
+// }
+
+// const inlineHints = () => {
+//     let current_sun_value = parseInt($current_sun.val());
+//     let current_water_value = parseInt($current_water.val());
+//     let current_soil_type = $('input[name=options]:checked', '#soil-type').val();
+//     // debugger;
+//     // sun hint
     
 
-    // // water hint
-    // if (current_water_value < current_plant.waterMin) {
-    //     waterHint = "more water";
-    //     $('#water-indicator').text(waterHint);
-    // } else if (current_water_value > current_plant.waterMax) {
-    //     waterHint = "less water";
-    //     $('#water-indicator').text(waterHint);
-    // }
-}
-
-
+//     // water hint
+//     if (current_water_value < current_plant.waterMin) {
+//         waterHint = "more water";
+//         $('#water-indicator').text(waterHint);
+//     } else if (current_water_value > current_plant.waterMax) {
+//         waterHint = "less water";
+//         $('#water-indicator').text(waterHint);
+//     }
+// }
 
 const winChecker = () => {
     let current_sun_value = parseInt($current_sun.val());
     let current_water_value = parseInt($current_water.val());
     let current_soil_type = $('input[name=options]:checked', '#soil-type').val();
+    
+    let sunTrue = current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax;
+    let waterTrue = current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax;
+    let soilTypeTrue = current_soil_type === current_plant.soilType;
 
     $("#hit-counter").text(counter);
     // TODO: clean up conditionals below
 
     // If all conditions are met
-    if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax) &&
-        (current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax) &&
-        (current_soil_type === current_plant.soilType)) {
+    if (sunTrue && waterTrue && soilTypeTrue) {
         console.log("win") // test
         // resetGame();
         alert("You kept " + current_plant.name + " out of the Upside Down!");
         window.location.reload();
     }
     // Water is incorrect
-    else if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax) &&
-        (current_water_value < current_plant.waterMin || current_water_value > current_plant.waterMax) &&
-        (current_soil_type === current_plant.soilType)) {
+    else if (sunTrue && !waterTrue && soilTypeTrue) {
         console.log("Water levels are off")
         hint = "Water levels are off, everything else good."
         counter++;
         counterCheck();
     }
     // Sun levels are incorrect
-    else if ((current_sun_value < current_plant.sunMin || current_sun_value > current_plant.sunMax) &&
-        (current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax) &&
-        (current_soil_type === current_plant.soilType)) {
+    else if (!sunTrue && waterTrue && soilTypeTrue) {
         console.log("Sun levels are off, everything else good.")
         hint = "Sun levels are off, everything else good.";
         counter++;
         counterCheck();
     }
     // Soil type is incorrect
-    else if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax) &&
-        (current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax) &&
-        (current_soil_type !== current_plant.soilType)) {
+    else if (sunTrue && waterTrue && !soilTypeTrue) {
         console.log("Try a different kind of soil...")
         hint = "Try a different kind of soil"
         counter++;
         counterCheck();
     }
     // Water is corrent only
-    else if ((current_sun_value < current_plant.sunMin || current_sun_value > current_plant.sunMax) &&
-        (current_water_value >= current_plant.waterMin && current_water_value <= current_plant.waterMax) &&
-        (current_soil_type !== current_plant.soilType)) {
+    else if ( !sunTrue && waterTrue && !soilTypeTrue ) {
         console.log("You've got the right amount of water.")
         hint = "You've got the right amount of water, soil and sun levels are off."
         counter++;
         counterCheck();
     }
     // Soil is only correct
-    else if ((current_sun_value < current_plant.sunMin || current_sun_value > current_plant.sunMax) &&
-        (current_water_value < current_plant.waterMin || current_water_value > current_plant.waterMax) &&
-        (current_soil_type === current_plant.soilType)) {
+    else if (!sunTrue && !waterTrue && soilTypeTrue) {
         console.log("You've got the right type of soil, water and sun levels are off.")
         hint = "You've got the right type of soil, water and sun levels are off."
         counter++;
         counterCheck();
     }
     // Sun is corrent only
-    else if ((current_sun_value >= current_plant.sunMin && current_sun_value <= current_plant.sunMax) &&
-        (current_water_value < current_plant.waterMin || current_water_value > current_plant.waterMax) &&
-        (current_soil_type !== current_plant.soilType)) {
+    else if (sunTrue && !waterHint && !soilTypeTrue) {
         console.log("You've got the right amount of sun, soil type and water levels are off.")
         hint = "You've got the right amount of sun, soil type and water levels are off."
         counter++;
