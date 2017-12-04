@@ -1,10 +1,13 @@
+let randomSunMin = Math.floor(Math.random() * 60) + 30;
+let randomWaterMin = Math.floor(Math.random() * 50) + 20;
+
 let plants = [{
     name: "Democorngon",
-    sunMin: 77,
-    sunMax: 91,
+    sunMin: randomSunMin,
+    sunMax: randomSunMin + Math.floor(Math.random() * 15) + 5,
     soilType: "Sandy",
-    waterMax: 65,
-    waterMin: 40,
+    waterMax: randomWaterMin + Math.floor(Math.random() * 15) + 5,
+    waterMin: randomWaterMin,
     sick: false,
     img: "./assets/corn.svg"
 }];
