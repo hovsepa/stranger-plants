@@ -1,0 +1,106 @@
+/* General */
+
+html {
+    font-family: sans-serif;
+}
+
+.plant-box {
+    text-align: center;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.plant-box img {
+    margin: 2em auto;
+}
+
+#logo {
+    display: block;
+    margin: 2em auto 0 auto;
+}
+
+#instructions {
+    margin: 2%;
+    text-align: center;
+}
+
+#incorrect-guesses {
+    margin: 1em 0;
+}
+
+
+/* Slider */
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #7EB334;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #7EB334;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+/* Button */
+
+.btn-agrilyst {
+    color: #FFFFFF;
+    background-color: #473894;
+    border-color: #473894;
+}
+
+.btn-agrilyst:hover,
+.btn-agrilyst:focus,
+.btn-agrilyst:active,
+.btn-agrilyst.active,
+.open .dropdown-toggle.btn-agrilyst {
+    color: #FFFFFF;
+    background-color: #7668BA;
+    border-color: #473894;
+}
+
+.btn-agrilyst:active,
+.btn-agrilyst.active,
+.open .dropdown-toggle.btn-agrilyst {
+    background-image: none;
+}
+
+
+/* MISC */
+
+#sun-level,
+#water-level,
+#hit-counter {
+    font-weight: 700;
+    color: #444;
+}

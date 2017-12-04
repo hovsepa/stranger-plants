@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stranger Plants</title>
+    <!-- reset.css -->
+    <link rel="stylesheet" href="./styles/reset.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="./assets/stranger-plants.svg" alt="Stranger Things Logo" id="logo">
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="instructions">
+        <div class="container">
+            <div class="row">
+                <strong>Instructions:</strong> Adjust levels of sun, water and soil type to keep your plant out of the upside down
+                (it's a bad place).
+            </div>
+        </div>
+    </section>
+    <section class="main-content">
+        <div class="container">
+            <div class="row align-middle">
+                <div class="col-sm-4 plant-box" id="corn">
+                    <div>
+                        <h3 id="plant-name"></h3>
+                    </div>
+                    <div id="plant-image">
+
+                    </div>
+                    <!-- <img src="./assets/corn.svg" alt="Democorgon"> -->
+                    <div>
+                        <button type='button' class='btn btn-agrilyst' id="btn-hint">HINT</button>
+                    </div>
+                    <div id="incorrect-guesses">
+                        You've made
+                        <span id="hit-counter"></span> incorrect guesses.
+                    </div>
+                </div>
+                <div class="col-sm-6 align-middle" id="current-status">
+                    <div>
+                        <h3>Current Status</h3>
+                    </div>
+                    <div>
+                        <div id="sun-levels">
+                            <p>Sun Levels Currently
+                                <span id="sun-level"></span>
+                                Degrees Fahrenheit
+                            </p>
+                            <input type="range" min="30" max="100" value="60" class="slider" id="sun-number">
+                        </div>
+                        <div id="water-levels">
+                            <p>Water Levels Currently
+                                <span id="water-level"></span>
+                                Gallons (Total)
+                            </p>
+                            <input type="range" min="20" max="90" value="35" class="slider" id="water-number">
+                        </div>
+                        <div id="soil-type">
+                            <p>Soil Type</p>
+                            <div class="btn-group" data-toggle="buttons" id="soil-type">
+                                <label class="btn btn-agrilyst active">
+                                    <input type="radio" value="Clay" name="options" id="option1" autocomplete="off" checked> Clay
+                                </label>
+                                <label class="btn btn-agrilyst">
+                                    <input type="radio" value="Peaty" name="options" id="option2" autocomplete="off"> Peaty
+                                </label>
+                                <label class="btn btn-agrilyst">
+                                    <input type="radio" value="Sandy" name="options" id="option3" autocomplete="off"> Sandy
+                                </label>
+                                <label class="btn btn-agrilyst">
+                                    <input type="radio" value="Chalky" name="options" id="option3" autocomplete="off"> Chalky
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="supplemental-section">
+        <div class="container">
+            <div class="row">
+                <div id="medicine" class="col-6-sm">
+                    <!-- <button type='button' class='btn btn-warning'>Medicine</button> -->
+                    <!-- </div>
+                <div id="hint" class="col-6-sm"> -->
+                </div>
+            </div>
+            <div class="row" id="hint-box">
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="./scripts/app.js"></script>
+</body>
+
+</html>
